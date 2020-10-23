@@ -1,0 +1,13 @@
+--Q10.
+CREATE OR REPLACE TRIGGER Check_date 
+BEFORE INSERT ON Employee
+FOR EACH ROW
+BEGIN
+  IF (:NEW.doj < SYSDATE) THEN
+    :NEW.doj:=SYSDATE;
+    DBMS_OUTPUT.PUT_LINE('DATE UPDATED!');
+  END IF;
+END;
+
+INSERT INTO Employee VALUES (7, 'Adam', 500, 'Mailman', 2, 'MAY-04-2019');
+INSERT INTO Employee VALUES (8, 'Adam', 500, 'Mailman', 1, 'MAY-04-2017');
